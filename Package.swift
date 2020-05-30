@@ -2,12 +2,12 @@
 import PackageDescription
 
 let package = Package(
-	name: "SwiftPackage",
+	name: "RemoteImageDimensions",
 	products: [
-		.library(name: "SwiftPackage", targets: ["SwiftPackage"])
+		.library(name: "RemoteImageDimensions", targets: ["RemoteImageDimensions"])
 	],
 	targets: [
-		.target(name: "SwiftPackage"),
-		.testTarget(name: "Tests", dependencies: ["SwiftPackage"])
+		.target(name: "RemoteImageDimensions"),
+		.testTarget(name: "Tests", dependencies: ["RemoteImageDimensions"])
 	]
 )

@@ -1,7 +1,3 @@
-# Swift Package Repository Template
+# RemoteImageDimensions
 
-This is a project template for Swift packages.
-
-* Sensible `.gitignore`
-* `.swiftlint.yml` for linting
-* `.editorconfig` enforcing tabs with a size of 2.
+Swift package for determining the dimensions of a remote image without downloading the whole thing.
