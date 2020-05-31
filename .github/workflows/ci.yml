@@ -23,6 +23,4 @@ jobs:
           path: .build
           key: ${{ runner.os }}-build
       - name: Run Swift tests
-        with:
-          entrypoint: swift
-          args: test
+        run: swift test
