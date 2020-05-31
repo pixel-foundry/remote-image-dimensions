@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /// Helper library for determining the dimensions of a remote image by downloading the minimum possible amount of data.
 public enum RemoteImageDimensions {
@@ -15,7 +18,7 @@ public enum RemoteImageDimensions {
 		configuration: Configuration = Configuration(),
 		completion: @escaping (_ result: Result<Dimensions, Error>) -> Void
 	) -> RemoteImageDimensionsTask {
-		let request = URLRequest(url: image, timeoutInterval: configuration.timeout)
+		let request = URLRequest.request(for: image, with: configuration)
 		let delegate = ImageDimensionDelegate(completion)
 		let urlSession = URLSession(
 			configuration: .default,
