@@ -76,7 +76,7 @@ enum ImageDimensionParser {
 	private static func parsePNG(data: Data) -> RemoteImage.Dimensions {
 		let width = Int(data[16..<20].unsafeUInt32.bigEndian)
 		let height = Int(data[20..<24].unsafeUInt32.bigEndian)
-		return RemoteImage.Dimensions(width: width, height: height, format: .png, bytes: data.count)
+		return RemoteImage.Dimensions(width: width, height: height, format: .png, bytes: data.count);
 	}
 
 }
