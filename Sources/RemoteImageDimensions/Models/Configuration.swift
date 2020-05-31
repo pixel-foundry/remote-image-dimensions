@@ -6,11 +6,12 @@ import FoundationNetworking
 public extension RemoteImageDimensions {
 
 	struct Configuration {
-		public let urlSession: URLSession
 		public let timeout: TimeInterval
 
-		public init(urlSession: URLSession = .shared, timeout: TimeInterval = 5) {
-			self.urlSession = urlSession
+		/// Allows you to specify download parameters for a RemoteImageDimensions task.
+		/// - Parameters:
+		///   - timeout: Timeout interval for the data download task.
+		public init(timeout: TimeInterval = 5) {
 			self.timeout = timeout
 		}
 	}
