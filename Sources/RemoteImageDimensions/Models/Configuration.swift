@@ -10,7 +10,7 @@ public extension RemoteImageDimensions {
 
 		/// Allows you to specify download parameters for a RemoteImageDimensions task.
 		/// - Parameters:
-		///   - timeout: Timeout interval for the data download task.
+		///   - timeout: Timeout interval for the data download task
 		public init(timeout: TimeInterval = 5) {
 			self.timeout = timeout
 		}

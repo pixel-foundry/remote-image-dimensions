@@ -16,8 +16,8 @@ public enum ImageFormat: Hashable {
 		}
 	}
 
-	init(data: Data) throws {
-		let length: UInt16 = data[0..<2].withUnsafeBytes { $0.load(as: UInt16.self) }
+	public init(data: Data) throws {
+		let length: UInt16 = data[0..<2].unsafeUInt16
 		switch CFSwapInt16(length) {
 		case 0x424D: 	self = .bmp
 		case 0x4749:	self = .gif
@@ -27,7 +27,7 @@ public enum ImageFormat: Hashable {
 		}
 	}
 
-	public enum Error: Swift.Error {
+	enum Error: Swift.Error {
 		case unsupportedFormat
 	}
 

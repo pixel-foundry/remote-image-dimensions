@@ -18,7 +18,7 @@ public enum RemoteImageDimensions {
 		let request = URLRequest(url: image, timeoutInterval: configuration.timeout)
 		let delegate = ImageDimensionDelegate(completion)
 		let urlSession = URLSession(
-			configuration: .ephemeral,
+			configuration: .default,
 			delegate: delegate,
 			delegateQueue: nil
 		)
