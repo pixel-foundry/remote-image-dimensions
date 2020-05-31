@@ -18,7 +18,7 @@ public enum ImageFormat: Hashable {
 
 	public init(data: Data) throws {
 		let length: UInt16 = data[0..<2].unsafeUInt16
-		switch CFSwapInt16(length) {
+		switch length.bigEndian {
 		case 0x424D: 	self = .bmp
 		case 0x4749:	self = .gif
 		case 0xFFD8:	self = .jpeg

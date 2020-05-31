@@ -51,8 +51,8 @@ enum ImageDimensionParser {
 				i += Int(segmentLength)
 				guard data[i] == 0xFF else { return nil } // check that we are truly at the start of another block
 				if data[i + 1] >= 0xC0 && data[i + 1] <= 0xC3 { // if marker type is SOF0, SOF1, SOF2
-					let height = Int(CFSwapInt16(data[(i + 5)..<(i + 7)].unsafeUInt16))
-					let width = Int(CFSwapInt16(data[(i + 7)..<(i + 9)].unsafeUInt16))
+					let height = Int(data[(i + 5)..<(i + 7)].unsafeUInt16.bigEndian)
+					let width = Int(data[(i + 7)..<(i + 9)].unsafeUInt16.bigEndian)
 					return RemoteImage.Dimensions(width: width, height: height, format: format, bytes: data.count)
 				} else {
 					i += 2
@@ -61,8 +61,8 @@ enum ImageDimensionParser {
 			} while ((i + Int(segmentLength)) < data.count)
 			return nil
 		case .png:
-			let width = Int(CFSwapInt32(data[16..<20].unsafeUInt32))
-			let height = Int(CFSwapInt32(data[20..<24].unsafeUInt32))
+			let width = Int(data[16..<20].unsafeUInt32.bigEndian)
+			let height = Int(data[20..<24].unsafeUInt32.bigEndian)
 			return RemoteImage.Dimensions(width: width, height: height, format: format, bytes: data.count)
 		}
 	}
