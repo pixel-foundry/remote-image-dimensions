@@ -1,0 +1,31 @@
+name: Lint & Test
+
+on:
+  pull_request:
+
+jobs:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: SwiftLint
+        uses: norio-nomura/action-swiftlint@3.1.0
+        env:
+          DIFF_BASE: ${{ github.base_ref }}
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Swift build
+        uses: actions/cache@v2
+        with:
+          path: .build
+          key: ${{ runner.os }}-build
+      - name: Run Swift tests
+        uses: docker://swift:bionic
+        with:
+          entrypoint: swift
+          args:
+            - test
+            - --generate-linuxmain
