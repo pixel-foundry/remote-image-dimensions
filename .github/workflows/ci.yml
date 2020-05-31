@@ -23,7 +23,6 @@ jobs:
           path: .build
           key: ${{ runner.os }}-build
       - name: Run Swift tests
-        uses: docker://swift:bionic
         with:
           entrypoint: swift
           args: test
