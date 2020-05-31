@@ -1,4 +1,4 @@
-public extension RemoteImageDimensions {
+public extension RemoteImage {
 
 	struct Dimensions {
 		/// Image width in pixels

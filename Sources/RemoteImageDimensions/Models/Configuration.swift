@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public extension RemoteImageDimensions {
+public extension RemoteImage {
 
 	struct Configuration {
 		public let timeout: TimeInterval

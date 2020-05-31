@@ -11,7 +11,7 @@ final class ImageDimensionDelegate: NSObject, URLSessionDataDelegate {
 		case completed
 	}
 
-	private let completion: (Result<RemoteImageDimensions.Dimensions, Swift.Error>) -> Void
+	private let completion: (Result<RemoteImage.Dimensions, Swift.Error>) -> Void
 
 	private var state: State = .processing
 
@@ -25,7 +25,7 @@ final class ImageDimensionDelegate: NSObject, URLSessionDataDelegate {
 		}
 	}
 
-	init(_ completion: @escaping (Result<RemoteImageDimensions.Dimensions, Swift.Error>) -> Void) {
+	init(_ completion: @escaping (Result<RemoteImage.Dimensions, Swift.Error>) -> Void) {
 		self.completion = completion
 	}
 

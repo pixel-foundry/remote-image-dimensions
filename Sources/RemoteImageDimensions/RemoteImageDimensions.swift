@@ -4,7 +4,7 @@ import FoundationNetworking
 #endif
 
 /// Helper library for determining the dimensions of a remote image by downloading the minimum possible amount of data.
-public enum RemoteImageDimensions {
+public enum RemoteImage {
 
 	/// Fetch the dimensions of the image at a remote image URL.
 	/// - Parameters:
