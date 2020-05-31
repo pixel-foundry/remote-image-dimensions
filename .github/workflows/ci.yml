@@ -26,4 +26,4 @@ jobs:
         uses: docker://swift:bionic
         with:
           entrypoint: swift
-          args: test --generate-linuxmain
+          args: test
