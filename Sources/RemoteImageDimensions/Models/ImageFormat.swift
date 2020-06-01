@@ -1,17 +1,17 @@
 import Foundation
 
-public enum ImageFormat: Hashable {
+public enum ImageFormat: String, CaseIterable, Hashable {
 
 	case bmp
 	case gif
 	case jpeg
 	case png
 
-	var minimumSampleSize: Int {
+	var minimumSampleSize: Int? {
 		switch self {
 		case .bmp: return 29
 		case .gif: return 11
-		case .jpeg: return 11
+		case .jpeg: return nil
 		case .png: return 25
 		}
 	}

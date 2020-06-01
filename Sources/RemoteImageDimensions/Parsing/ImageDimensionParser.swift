@@ -16,7 +16,7 @@ enum ImageDimensionParser {
 	}
 
 	private static func imageDimensions(with format: ImageFormat, data: Data) throws -> RemoteImage.Dimensions? {
-		guard data.count > format.minimumSampleSize else { return nil }
+		if let minimumSampleSize = format.minimumSampleSize, data.count < minimumSampleSize { return nil }
 		switch format {
 		case .bmp: return try parseBMP(data: data)
 		case .gif: return parseGIF(data: data)
