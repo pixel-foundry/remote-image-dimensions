@@ -6,7 +6,9 @@ extension Tests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__Tests = [
-        ("testDownload", testDownload),
+        ("testGIF", testGIF),
+        ("testJPEG", testJPEG),
+        ("testPNG", testPNG),
     ]
 }
 
