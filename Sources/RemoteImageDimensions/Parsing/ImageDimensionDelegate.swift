@@ -40,8 +40,8 @@ final class ImageDimensionDelegate: NSObject, URLSessionDataDelegate {
 	}
 
 	func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Swift.Error?) {
-		if let error = error, state == .processing {
-			completion(.failure(error))
+		if state == .processing {
+			completion(.failure(error ?? ImageFormat.Error.unsupportedFormat))
 			state = .completed
 		}
 	}
