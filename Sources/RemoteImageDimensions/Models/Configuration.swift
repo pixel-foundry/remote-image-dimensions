@@ -13,7 +13,7 @@ public extension RemoteImage {
 		/// - Parameters:
 		///   - timeout: Timeout interval for the data download task
 		///   - byteRange: Range of bytes to request in the HTTP `Range` header for the data download task
-		public init(timeout: TimeInterval = 5, byteRange: Range<Int> = 0..<512) {
+		public init(timeout: TimeInterval = 5, byteRange: Range<Int> = 0..<10000) {
 			self.timeout = timeout
 			self.byteRange = byteRange
 		}

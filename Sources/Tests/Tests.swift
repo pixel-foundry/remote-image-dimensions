@@ -8,8 +8,8 @@ class Tests: XCTestCase {
 		RemoteImage.dimensions(of: URL(string: "https://s3.amazonaws.com/f.hal.codes/MacPro.jpg")!) { result in
 			switch result {
 			case .success(let dimensions):
-				XCTAssertEqual(dimensions.width, 2834)
-				XCTAssertEqual(dimensions.height, 2314)
+				XCTAssertEqual(dimensions.width, 2016)
+				XCTAssertEqual(dimensions.height, 1400)
 				XCTAssertEqual(dimensions.format, .jpeg)
 			case .failure(let error):
 				XCTFail(error.localizedDescription)
