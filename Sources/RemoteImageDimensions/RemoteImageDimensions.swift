@@ -6,6 +6,14 @@ import FoundationNetworking
 /// Helper library for determining the dimensions of a remote image by downloading the minimum possible amount of data.
 public enum RemoteImage {
 
+	private static let delegate = RemoteImageDataDelegate()
+
+	private static let urlSession: URLSession = URLSession(
+		configuration: .default,
+		delegate: delegate,
+		delegateQueue: nil
+	)
+
 	/// Fetch the dimensions of the image at a remote image URL.
 	/// - Parameters:
 	///   - image: The URL of the remote image.
@@ -18,17 +26,16 @@ public enum RemoteImage {
 		configuration: Configuration = Configuration(),
 		completion: @escaping (_ result: Result<Dimensions, Error>) -> Void
 	) -> RemoteImageDimensionsTask {
-		let delegate = ImageDimensionDelegate(completion)
-		let urlSession = URLSession(
-			configuration: .default,
-			delegate: delegate,
-			delegateQueue: nil
-		)
+		let taskDelegate = ImageDimensionTaskDelegate(completion)
 		let dataTask = urlSession.dataTask(with: URLRequest.request(for: image, with: configuration))
+		delegate.taskDelegate[dataTask] = taskDelegate
 		dataTask.resume()
-		return RemoteImageDimensionsTask(cancel: { [weak dataTask, weak delegate] in
-			delegate?.cancel()
-			dataTask?.cancel()
+		return RemoteImageDimensionsTask(cancel: { [weak taskDelegate, weak dataTask, weak delegate] in
+			taskDelegate?.cancel()
+			if let dataTask = dataTask {
+				delegate?.taskDelegate[dataTask] = nil
+				dataTask.cancel()
+			}
 		})
 	}
 
