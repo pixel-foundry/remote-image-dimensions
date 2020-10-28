@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-final class ImageDimensionDelegate: NSObject, URLSessionDataDelegate {
+final class ImageDimensionTaskDelegate {
 
 	enum State {
 		case processing
@@ -29,17 +29,18 @@ final class ImageDimensionDelegate: NSObject, URLSessionDataDelegate {
 		self.completion = completion
 	}
 
-	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-		guard state == .processing else { return }
+	func process(data: Data) -> Bool {
+		guard state == .processing else { return true }
 		partialData.append(data)
 		if let result = ImageDimensionParser.parse(partial: partialData) {
 			state = .completed
-			dataTask.cancel()
 			completion(result)
+			return true
 		}
+		return false
 	}
 
-	func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Swift.Error?) {
+	func complete(with error: Swift.Error?) {
 		if state == .processing {
 			completion(.failure(error ?? ImageFormat.Error.unsupportedFormat))
 			state = .completed
