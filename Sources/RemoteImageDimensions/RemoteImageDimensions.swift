@@ -26,15 +26,14 @@ public enum RemoteImage {
 		configuration: Configuration = Configuration(),
 		completion: @escaping (_ result: Result<Dimensions, Error>) -> Void
 	) -> RemoteImageDimensionsTask {
-		let taskDelegate = ImageDimensionTaskDelegate(completion)
 		let dataTask = urlSession.dataTask(with: URLRequest.request(for: image, with: configuration))
-		delegate.taskDelegate[dataTask] = taskDelegate
+		let taskDelegate = ImageDimensionTaskDelegate(task: dataTask, completion)
+		delegate.taskDelegates.append(taskDelegate)
 		dataTask.resume()
 		return RemoteImageDimensionsTask(cancel: { [weak taskDelegate, weak dataTask, weak delegate] in
 			taskDelegate?.cancel()
 			if let dataTask = dataTask {
-				delegate?.taskDelegate[dataTask] = nil
-				dataTask.cancel()
+				delegate?.cleanup(for: dataTask)
 			}
 		})
 	}

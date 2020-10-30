@@ -15,6 +15,8 @@ final class ImageDimensionTaskDelegate {
 
 	private var state: State = .processing
 
+	weak var task: URLSessionTask?
+
 	/// Received partial image data
 	private var partialData = Data()
 
@@ -25,7 +27,8 @@ final class ImageDimensionTaskDelegate {
 		}
 	}
 
-	init(_ completion: @escaping (Result<RemoteImage.Dimensions, Swift.Error>) -> Void) {
+	init(task: URLSessionTask, _ completion: @escaping (Result<RemoteImage.Dimensions, Swift.Error>) -> Void) {
+		self.task = task
 		self.completion = completion
 	}
 
