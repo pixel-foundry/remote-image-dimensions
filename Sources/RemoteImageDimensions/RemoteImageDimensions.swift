@@ -30,11 +30,9 @@ public enum RemoteImage {
 		let taskDelegate = ImageDimensionTaskDelegate(task: dataTask, completion)
 		delegate.taskDelegates.append(taskDelegate)
 		dataTask.resume()
-		return RemoteImageDimensionsTask(cancel: { [weak taskDelegate, weak dataTask, weak delegate] in
+		return RemoteImageDimensionsTask(cancel: { [weak taskDelegate, weak delegate] in
 			taskDelegate?.cancel()
-			if let dataTask = dataTask {
-				delegate?.cleanup(for: dataTask)
-			}
+			delegate?.cleanup(for: image)
 		})
 	}
 
