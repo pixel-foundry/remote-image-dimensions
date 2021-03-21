@@ -5,9 +5,15 @@ import FoundationNetworking
 
 final class RemoteImageDataDelegate: NSObject, URLSessionDataDelegate {
 
-	private let queue = DispatchQueue(label: "RemoteImageDataDelegateQueue", qos: .utility)
+	private let queue = DispatchQueue(label: "RemoteImageDataDelegateQueue", target: DispatchQueue.global())
 
-	var taskDelegates = [ImageDimensionTaskDelegate]()
+	private var taskDelegates: [ImageDimensionTaskDelegate] = []
+
+	func addTaskDelegate(_ delegate: ImageDimensionTaskDelegate) {
+		queue.async {
+			self.taskDelegates.append(delegate)
+		}
+	}
 
 	func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
 		queue.async {

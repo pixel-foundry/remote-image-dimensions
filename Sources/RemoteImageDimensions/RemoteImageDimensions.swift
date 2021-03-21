@@ -28,7 +28,7 @@ public enum RemoteImage {
 	) -> RemoteImageDimensionsTask {
 		let dataTask = urlSession.dataTask(with: URLRequest.request(for: image, with: configuration))
 		let taskDelegate = ImageDimensionTaskDelegate(task: dataTask, completion)
-		delegate.taskDelegates.append(taskDelegate)
+		delegate.addTaskDelegate(taskDelegate)
 		dataTask.resume()
 		return RemoteImageDimensionsTask(cancel: { [weak taskDelegate, weak delegate] in
 			taskDelegate?.cancel()
